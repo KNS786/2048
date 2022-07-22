@@ -46,6 +46,28 @@ HTMLActuator.prototype.clearContainer = function (container) {
   }
 };
 
+let convertNumberToRomans=function(value){
+
+  let Numbers=[1,4,5,9,10,40,50,90,100,400,500,900,1000]
+  let RomansLetter =['I','IV','V','IX','X','XL','X','XC','C','CD','D','CM','M']
+  let i = 12;
+
+  let result = "";
+  while( value > 0){
+    let div = value / Numbers[i];
+    value=value%Numbers[i];
+    while((--div) >= 0){
+       result+=RomansLetter[i];
+    }
+    i--;
+
+  }
+  console.log("result  : "+result )
+  return result;
+
+};
+
+
 HTMLActuator.prototype.addTile = function (tile) {
   var self = this;
 
@@ -62,7 +84,9 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  inner.textContent = tile.value;
+
+  // Convert Number Into Roman Letter 
+  inner.textContent = convertNumberToRomans(tile.value);
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
@@ -88,6 +112,7 @@ HTMLActuator.prototype.addTile = function (tile) {
 
   // Put the tile on the board
   this.tileContainer.appendChild(wrapper);
+  
 };
 
 HTMLActuator.prototype.applyClasses = function (element, classes) {
