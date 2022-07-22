@@ -62,7 +62,6 @@ let convertNumberToRomans=function(value){
     i--;
 
   }
-  console.log("result  : "+result )
   return result;
 
 };
